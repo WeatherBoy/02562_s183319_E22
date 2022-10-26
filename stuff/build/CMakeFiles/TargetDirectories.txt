@@ -1,0 +1,4 @@
+C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build/CMakeFiles/SOIL.dir
+C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build/CMakeFiles/raytrace.dir
+C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build/CMakeFiles/edit_cache.dir
+C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build/CMakeFiles/rebuild_cache.dir

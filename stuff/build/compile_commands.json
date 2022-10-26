@@ -1,0 +1,252 @@
+[
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/gcc.exe  @CMakeFiles/SOIL.dir/includes_C.rsp -g -o CMakeFiles/SOIL.dir/SOIL/SOIL.c.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/SOIL/SOIL.c",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/SOIL/SOIL.c"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/gcc.exe  @CMakeFiles/SOIL.dir/includes_C.rsp -g -o CMakeFiles/SOIL.dir/SOIL/image_DXT.c.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/SOIL/image_DXT.c",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/SOIL/image_DXT.c"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/gcc.exe  @CMakeFiles/SOIL.dir/includes_C.rsp -g -o CMakeFiles/SOIL.dir/SOIL/image_helper.c.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/SOIL/image_helper.c",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/SOIL/image_helper.c"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/gcc.exe  @CMakeFiles/SOIL.dir/includes_C.rsp -g -o CMakeFiles/SOIL.dir/SOIL/stb_image.c.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/SOIL/stb_image.c",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/SOIL/stb_image.c"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/gcc.exe  @CMakeFiles/SOIL.dir/includes_C.rsp -g -o CMakeFiles/SOIL.dir/SOIL/stb_image_write.c.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/SOIL/stb_image_write.c",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/SOIL/stb_image_write.c"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Accelerator.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Accelerator.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Accelerator.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/AreaLight.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/AreaLight.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/AreaLight.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/BRDF.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/BRDF.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/BRDF.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/BspTree.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/BspTree.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/BspTree.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Camera.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Camera.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Camera.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Directional.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Directional.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Directional.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Distribution1D.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Distribution1D.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Distribution1D.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Distribution2D.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Distribution2D.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Distribution2D.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/GLViewController.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/GLViewController.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/GLViewController.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Gamma.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Gamma.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Gamma.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Glossy.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Glossy.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Glossy.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/GlossyVolume.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/GlossyVolume.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/GlossyVolume.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/HDRTexture.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/HDRTexture.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/HDRTexture.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Holdout.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Holdout.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Holdout.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/InvSphereMap.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/InvSphereMap.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/InvSphereMap.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Lambertian.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Lambertian.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Lambertian.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/MCGlossy.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/MCGlossy.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/MCGlossy.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/MerlShader.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/MerlShader.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/MerlShader.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/MerlTexture.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/MerlTexture.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/MerlTexture.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Mirror.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Mirror.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Mirror.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/PanoramicLight.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/PanoramicLight.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/PanoramicLight.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/PanoramicTexture.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/PanoramicTexture.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/PanoramicTexture.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/ParticleTracer.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/ParticleTracer.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/ParticleTracer.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/PathTracer.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/PathTracer.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/PathTracer.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Phong.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Phong.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Phong.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/PhotonCaustics.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/PhotonCaustics.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/PhotonCaustics.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Plane.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Plane.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Plane.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/PointLight.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/PointLight.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/PointLight.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/QuatTrackBall.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/QuatTrackBall.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/QuatTrackBall.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Randomizer.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Randomizer.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Randomizer.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/RayCaster.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/RayCaster.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/RayCaster.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/RayTracer.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/RayTracer.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/RayTracer.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/RenderEngine.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/RenderEngine.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/RenderEngine.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Scene.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Scene.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Scene.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Sphere.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Sphere.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Sphere.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/SphereTexture.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/SphereTexture.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/SphereTexture.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Texture.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Texture.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Texture.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Textured.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Textured.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Textured.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Transparent.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Transparent.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Transparent.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/TriMesh.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/TriMesh.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/TriMesh.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Triangle.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Triangle.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Triangle.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/Volume.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Volume.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/Volume.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/obj_load.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/obj_load.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/obj_load.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/raytrace.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/raytrace.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/raytrace.cpp"
+},
+{
+  "directory": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/build",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/raytrace.dir/includes_CXX.rsp  -Wall -g -o CMakeFiles/raytrace.dir/raytrace/string_utils.cpp.obj -c C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/string_utils.cpp",
+  "file": "C:/Users/daflo/Documents/DTU/Semester_7/02562_Rendering/stuff/raytrace/string_utils.cpp"
+}
+]

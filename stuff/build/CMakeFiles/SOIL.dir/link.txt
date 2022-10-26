@@ -1,0 +1,2 @@
+C:/MinGW/bin/ar.exe qc libSOILd.a CMakeFiles/SOIL.dir/SOIL/SOIL.c.obj CMakeFiles/SOIL.dir/SOIL/image_DXT.c.obj CMakeFiles/SOIL.dir/SOIL/image_helper.c.obj CMakeFiles/SOIL.dir/SOIL/stb_image.c.obj CMakeFiles/SOIL.dir/SOIL/stb_image_write.c.obj
+C:/MinGW/bin/ranlib.exe libSOILd.a

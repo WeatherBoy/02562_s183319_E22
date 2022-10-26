@@ -1,0 +1,3 @@
+﻿cl : command line  warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  TriMesh.cpp
+  raytrace.vcxproj -> C:\Users\daflo\Documents\DTU\Semester_7\02562_Rendering\stuff\Debug\raytrace.exe
