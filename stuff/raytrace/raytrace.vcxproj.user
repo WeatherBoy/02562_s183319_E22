@@ -6,7 +6,7 @@
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LocalDebuggerCommandArguments>../models/CornellBox.obj ../models/CornellLeftSphere.obj ../models/CornellRightSphere.obj</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>../models/CornellBox.obj ../models/CornellBlocks.obj </LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

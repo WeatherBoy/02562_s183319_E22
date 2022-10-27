@@ -9,7 +9,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 #--------------------------------------------------------------------------
 
 # Just debug / release 
-set (CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
+set (CMAKE_CONFIGURATION_TYPES "Release" CACHE STRING "" FORCE)
+#set (CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
 
 # Setup compiler specific flags for different configuration modes
 IF (MSVC)
@@ -91,3 +92,7 @@ SET_TARGET_PROPERTIES(raytrace PROPERTIES RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL   
 SET_TARGET_PROPERTIES(raytrace PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${PROJECT_SOURCE_DIR}/bin/")
 
 #---------------------------------------------------------------------
+
+# Noget jeg har tilføjet
+set(CXXFLAGS  "-fopenmp -Wall -O3 -MMD -I${slate_dir}/include -DSLATE_NO_CUDA")
+set(CMAKE_CXX_FLAGS "${CXXFLAGS}")

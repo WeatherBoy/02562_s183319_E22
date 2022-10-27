@@ -1,2 +1,0 @@
-/stuff/.vs/
-/stuff/models/
