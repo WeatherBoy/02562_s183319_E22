@@ -116,7 +116,8 @@ bool Triangle::intersect(const Ray& r, HitInfo& hit, unsigned int prim_idx) cons
             * Maybe the normal vector isn't normalized?
             * Seems weird if that is the case, but now it is at least normalized.
             */
-            float3 const normalized_normal = normal_vector / sqrt(dot(normal_vector, normal_vector));
+            // float3 const normalized_normal = normal_vector / sqrt(dot(normal_vector, normal_vector));
+            float3 const normalized_normal = normalize(normal_vector);
             hit.geometric_normal = normalized_normal;
             hit.shading_normal = normalized_normal;
             hit.material = &material;

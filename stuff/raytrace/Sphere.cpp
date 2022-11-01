@@ -71,7 +71,8 @@ bool Sphere::intersect(const Ray& r, HitInfo& hit, unsigned int prim_idx) const 
 		* going from the center to the hit_position.
 		*/
 		float3 const p_minus_center = hit.position - center;
-		float3 const normal_to_sphere = p_minus_center / sqrt(dot(p_minus_center, p_minus_center));
+		// float3 const normal_to_sphere = p_minus_center / sqrt(dot(p_minus_center, p_minus_center));
+		float3 const normal_to_sphere = normalize(p_minus_center);
 		hit.geometric_normal = normal_to_sphere;
 		hit.shading_normal = normal_to_sphere;
 
@@ -89,7 +90,8 @@ bool Sphere::intersect(const Ray& r, HitInfo& hit, unsigned int prim_idx) const 
 		* going from the center to the hit_position.
 		*/
 		float3 const p_minus_center = hit.position - center;
-		float3 const normal_to_sphere = p_minus_center/sqrt( dot(p_minus_center, p_minus_center) );
+		// float3 const normal_to_sphere = p_minus_center / sqrt(dot(p_minus_center, p_minus_center));
+		float3 const normal_to_sphere = normalize(p_minus_center);
 		hit.geometric_normal = normal_to_sphere;
 		hit.shading_normal = normal_to_sphere;
 

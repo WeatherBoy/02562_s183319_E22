@@ -61,7 +61,7 @@ RenderEngine::RenderEngine()
     use_default_light(false),                                 // Choose whether to use the default light or not
     shadows_on(true),
     background(optix::make_float3(0.1f, 0.3f, 0.6f)),        // Background color
-    bgtex_filename("../../../textures/belfast_sunset_puresky_4k.hdr"),                                      // Background texture file name
+    bgtex_filename(""),                                      // Background texture file name //../../../textures/belfast_sunset_puresky_4k.hdr
     current_shader(0),
     lambertian(scene.get_lights()),
     photon_caustics(&tracer, scene.get_lights(), 1.0f, 50),  // Max distance and number of photons to search for
@@ -336,36 +336,40 @@ void RenderEngine::render() {
     done = true;
 }
 
-void RenderEngine::pathtrace()
-{
-  static Timer timer;
-  static bool first = true;
-  if(first)
-  {
+void RenderEngine::pathtrace() {
+
+    static Timer timer;
+    static bool first = true;
+    if(first)
+    {
     cout << "Render time:" << endl;
     first = false;
-  }
-  int no_of_samples = static_cast<int>(sample_number)+1;
-  bool print = (no_of_samples%10) == 0;
-  if(print) cout << no_of_samples;
-  timer.start(split_time);
+    }
+    int no_of_samples = static_cast<int>(sample_number)+1;
+    bool print = (no_of_samples%10) == 0;
+    if(print) cout << no_of_samples;
+    timer.start(split_time);
 
-  #pragma omp parallel for private(randomizer)
-  for(int j = 0; j < static_cast<int>(res.y); ++j)
-  {
+    #pragma omp parallel for private(randomizer)
+    for(int j = 0; j < static_cast<int>(res.y); ++j)
+    {
     for(unsigned int i = 0; i < res.x; ++i)
-      tracer.update_pixel(i, j, sample_number, image[i + j*res.x]);
+        tracer.update_pixel(i, j, sample_number, image[i + j*res.x]);
     if(print && ((j + 1) % 50) == 0)
-      cerr << ".";
-  }
+        cerr << ".";
+    }
 
-  timer.stop();
-  split_time = timer.get_time();
-  if(print) cout << ": " << split_time << endl;
-  ++sample_number;
+    timer.stop();
+    split_time = timer.get_time();
+    if (print) {
+        cout << ": " << split_time << endl;
+        save_as_bitmap();
 
-  init_texture();
-  glutPostRedisplay();
+    }
+    ++sample_number;
+
+    init_texture();
+    glutPostRedisplay();
 }
 
 
@@ -401,28 +405,31 @@ void RenderEngine::load_view(const string& filename)
   cam.set(eye, lookat, up, found_fd ? cam_const : cam.get_cam_const());
 }
 
-void RenderEngine::save_as_bitmap()
-{
-  string png_name = "out.png";
-  if(!filename.empty())
-  {
+void RenderEngine::save_as_bitmap() {
+    static int times_called = 0;
+    string str_times_called = std::to_string(times_called);
+    string png_name = "out.png";
+    if(!filename.empty())
+    {
     list<string> dot_split;
     split(filename, dot_split, ".");
-    png_name = dot_split.front() + ".png";
-  }
-  unsigned char* data = new unsigned char[res.x*res.y*3];
-  for(unsigned int j = 0; j < res.y; ++j)
+    png_name = dot_split.front() + "_" + str_times_called + ".png";
+    }
+    unsigned char* data = new unsigned char[res.x*res.y*3];
+    for(unsigned int j = 0; j < res.y; ++j)
     for(unsigned int i = 0; i < res.x; ++i)
     {
-      unsigned int d_idx = (i + res.x*j)*3;
-      unsigned int i_idx = i + res.x*(res.y - j - 1);
-      data[d_idx + 0] = static_cast<unsigned int>(std::min(image[i_idx].x, 1.0f)*255.0f + 0.5f);
-      data[d_idx + 1] = static_cast<unsigned int>(std::min(image[i_idx].y, 1.0f)*255.0f + 0.5f);
-      data[d_idx + 2] = static_cast<unsigned int>(std::min(image[i_idx].z, 1.0f)*255.0f + 0.5f);
+        unsigned int d_idx = (i + res.x*j)*3;
+        unsigned int i_idx = i + res.x*(res.y - j - 1);
+        data[d_idx + 0] = static_cast<unsigned int>(std::min(image[i_idx].x, 1.0f)*255.0f + 0.5f);
+        data[d_idx + 1] = static_cast<unsigned int>(std::min(image[i_idx].y, 1.0f)*255.0f + 0.5f);
+        data[d_idx + 2] = static_cast<unsigned int>(std::min(image[i_idx].z, 1.0f)*255.0f + 0.5f);
     }
-  stbi_write_png(("../../../Images_for_handIn/" + png_name).c_str(), res.x, res.y, 3, data, res.x * 3);
-  delete [] data;
-  cout << "Rendered image stored in " << png_name << "." << endl;
+    stbi_write_png(("../../../Images_for_handIn/CornelSpheres_movie/" + png_name).c_str(), res.x, res.y, 3, data, res.x * 3);
+    delete [] data;
+    
+    cout << "Rendered image stored in " << png_name << "." << endl;
+    ++times_called;
 }
 
 

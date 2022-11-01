@@ -69,7 +69,8 @@ bool Plane::intersect(const Ray& r, HitInfo& hit, unsigned int prim_idx) const {
 		/*
 		* Probably 
 		*/
-		float3 const normalized_normal = onb.m_normal / sqrt(dot(onb.m_normal, onb.m_normal));
+		// float3 const normalized_normal = onb.m_normal / sqrt(dot(onb.m_normal, onb.m_normal));
+		float3 const normalized_normal = normalize(onb.m_normal);
 		hit.geometric_normal = normalized_normal;
 		hit.shading_normal = normalized_normal;
 		hit.material = &material;
