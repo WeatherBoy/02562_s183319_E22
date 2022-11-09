@@ -156,24 +156,68 @@ bool RayTracer::trace_refracted(const Ray& in, const HitInfo& in_hit, Ray& out, 
 
 }
 
-bool RayTracer::trace_refracted(const Ray& in, const HitInfo& in_hit, Ray& out, HitInfo& out_hit, float& R) const
-{
-  // Initialize the refracted ray and trace it.
-  // Compute the Fresnel reflectance (see fresnel.h) and return it in R.
-  //
-  // Input:  in         (the ray to be refracted)
-  //         in_hit     (info about the ray-surface intersection)
-  //
-  // Output: out        (the refracted ray)
-  //         out_hit    (info about the refracted ray)
-  //
-  // Return: true if the refracted ray hit anything
-  //
-  // Hints: (a) There is a refract function available in the OptiX math library.
-  //        (b) Set out_hit.ray_ior and out_hit.trace_depth.
-  //        (c) Remember that the function must handle total internal reflection.
-  R = 0.1;
-  return trace_refracted(in, in_hit, out, out_hit);
+bool RayTracer::trace_refracted(const Ray& in, const HitInfo& in_hit, Ray& out, HitInfo& out_hit, float& R) const {
+	// Initialize the refracted ray and trace it.
+	// Compute the Fresnel reflectance (see fresnel.h) and return it in R.
+	//
+	// Input:  in         (the ray to be refracted)
+	//         in_hit     (info about the ray-surface intersection)
+	//
+	// Output: out        (the refracted ray)
+	//         out_hit    (info about the refracted ray)
+	//
+	// Return: true if the refracted ray hit anything
+	//
+	// Hints: (a) There is a refract function available in the OptiX math library.
+	//        (b) Set out_hit.ray_ior and out_hit.trace_depth.
+	//        (c) Remember that the function must handle total internal reflection.
+
+
+	/*
+	* We now go to Refracted Rays (week 3, slide 7).
+	* It might actually be Refraction and Total Internal Reflection (week 3, slide 8).
+	*
+	* n_i = refractive index in
+	* n_t = refractive index out
+	*/
+	float3 some_normal{};
+
+	out_hit.ray_ior = get_ior_out(in, in_hit, some_normal);
+
+	/*
+	* If refract returns false then there is total internal refraction.
+	* 
+	* Then we use the closest hit function, to find wether our outgoing Ray "out" actually hit anything.
+	*/
+	if (refract(out.direction, in.direction, some_normal, out_hit.ray_ior / in_hit.ray_ior)) {
+		/*
+		* Start by setting our tmin and tmax.
+		*/
+		float constexpr epsilon = 0.00001;
+		out.origin = in_hit.position;
+		out.tmin = epsilon;
+		out.tmax = RT_DEFAULT_MAX;
+
+		/*
+		* Jakob said that this trace_depth should just be incremented.
+		*/
+		out_hit.trace_depth = in_hit.trace_depth + 1;
+
+		float const cos_in = dot(-in.direction, in_hit.shading_normal);
+		float const cos_out = dot(in.direction, -in_hit.shading_normal);
+		
+		R = fresnel_R(cos_in, cos_out, in_hit.ray_ior, out_hit.ray_ior);
+		return scene->closest_hit(out, out_hit);
+
+	}
+
+	R = 1;
+	return out_hit.has_hit;
+
+	// R = 0.1;
+	// return trace_refracted(in, in_hit, out, out_hit);
+
+	
 }
 
 float RayTracer::get_ior_out(const Ray& in, const HitInfo& in_hit, float3& normal) const

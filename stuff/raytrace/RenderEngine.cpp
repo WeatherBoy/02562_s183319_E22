@@ -58,7 +58,7 @@ RenderEngine::RenderEngine()
     light_pow(optix::make_float3(M_PIf)),                    // Power of the default light
     light_dir(optix::make_float3(-1.0f)),                    // Direction of the default light
     default_light(&tracer, light_pow, light_dir),            // Construct default light
-    use_default_light(false),                                 // Choose whether to use the default light or not
+    use_default_light(true),                                 // Choose whether to use the default light or not
     shadows_on(true),
     background(optix::make_float3(0.1f, 0.3f, 0.6f)),        // Background color
     bgtex_filename(""),                                      // Background texture file name //../../../textures/belfast_sunset_puresky_4k.hdr
@@ -187,10 +187,18 @@ void RenderEngine::init_tracer()
     else
       bgtex.load(bgtex_filename.c_str());
     tracer.set_background(&bgtex);
-    //PanoramicLight* envlight = new PanoramicLight(&tracer, bgtex, 1);
-    //cout << "Adding light source: " << envlight->describe() << endl;
-    //scene.add_light(envlight);
-    //scene.add_plane(make_float3(0.0f), make_float3(0.0f, 1.0f, 0.0f), "../models/plane.mtl", 4); // holdout plane
+
+    
+    // PanoramicLight* envlight = new PanoramicLight(&tracer, bgtex, 1);
+    // cout << "Adding light source: " << envlight->describe() << endl;
+    // scene.add_light(envlight);
+    /*
+    * Commented back in for Worksheet07
+    */
+    scene.add_plane(make_float3(0.0f), make_float3(0.0f, 1.0f, 0.0f), "../models/plane.mtl", 4); // holdout plane
+    /*
+    * Till here...
+    */
   }
 
   // Set shaders
@@ -363,7 +371,7 @@ void RenderEngine::pathtrace() {
     split_time = timer.get_time();
     if (print) {
         cout << ": " << split_time << endl;
-        save_as_bitmap();
+        // save_as_bitmap();
 
     }
     ++sample_number;
@@ -406,14 +414,15 @@ void RenderEngine::load_view(const string& filename)
 }
 
 void RenderEngine::save_as_bitmap() {
-    static int times_called = 0;
-    string str_times_called = std::to_string(times_called);
+    // static int times_called = 0;
+    // string str_times_called = std::to_string(times_called);
     string png_name = "out.png";
     if(!filename.empty())
     {
     list<string> dot_split;
     split(filename, dot_split, ".");
-    png_name = dot_split.front() + "_" + str_times_called + ".png";
+    // png_name = dot_split.front() + "_" + str_times_called + ".png";
+    png_name = dot_split.front() + ".png";
     }
     unsigned char* data = new unsigned char[res.x*res.y*3];
     for(unsigned int j = 0; j < res.y; ++j)
@@ -425,11 +434,11 @@ void RenderEngine::save_as_bitmap() {
         data[d_idx + 1] = static_cast<unsigned int>(std::min(image[i_idx].y, 1.0f)*255.0f + 0.5f);
         data[d_idx + 2] = static_cast<unsigned int>(std::min(image[i_idx].z, 1.0f)*255.0f + 0.5f);
     }
-    stbi_write_png(("../../../Images_for_handIn/CornelSpheres_movie/" + png_name).c_str(), res.x, res.y, 3, data, res.x * 3);
+    stbi_write_png(("../../../Images_for_handIn/" + png_name).c_str(), res.x, res.y, 3, data, res.x * 3);
     delete [] data;
     
     cout << "Rendered image stored in " << png_name << "." << endl;
-    ++times_called;
+    //++times_called;
 }
 
 

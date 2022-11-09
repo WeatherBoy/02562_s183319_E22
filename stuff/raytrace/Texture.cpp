@@ -117,8 +117,8 @@ float4 Texture::sample_linear(const float3& texcoord) const {
     * Look at slide Texture Filtering (bilinear filtering)
     * (Slide 8, week 4)
     */
-    int const U = a;
-    int const V = b;
+    int const U = static_cast<int>(a);
+    int const V = static_cast<int>(b);
     float const c_1 = a - U;
     float const c_2 = b - V;
 
@@ -128,11 +128,13 @@ float4 Texture::sample_linear(const float3& texcoord) const {
     * 
     * We use the modulo operator to make sure that we handle edge cases properly.
     */
+    int const U0 = U % width;
     int const U1 = (U + 1) % width;
+    int const V0 = V % height;
     int const V1 = (V + 1) % height;
-    float4 const x00 = fdata[U + V * width];
-    float4 const x10 = fdata[U1 + V * width];
-    float4 const x01 = fdata[U + V1 * width];
+    float4 const x00 = fdata[U0 + V0 * width];
+    float4 const x10 = fdata[U1 + V0 * width];
+    float4 const x01 = fdata[U0 + V1 * width];
     float4 const x11 = fdata[U1 + V1 * width];
 
 

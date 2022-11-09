@@ -101,7 +101,7 @@ float3 RayCaster::compute_pixel(unsigned int x, unsigned int y) const {
                 /*
                 * If nothing was hit - we will just draw the background.
                 */
-                result += get_background();
+                result += get_background(some_ray.direction);
 
             }
         }

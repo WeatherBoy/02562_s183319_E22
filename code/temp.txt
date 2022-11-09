@@ -5,6 +5,7 @@
 
 import cv2
 import os
+
 print(os.getcwd())
 image_folder = "../../Images_for_handIn/Cornelblocks_movie"
 image_name = "cornellblocks_"
