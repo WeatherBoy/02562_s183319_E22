@@ -172,7 +172,6 @@ bool RayTracer::trace_refracted(const Ray& in, const HitInfo& in_hit, Ray& out, 
 	//        (b) Set out_hit.ray_ior and out_hit.trace_depth.
 	//        (c) Remember that the function must handle total internal reflection.
 
-
 	/*
 	* We now go to Refracted Rays (week 3, slide 7).
 	* It might actually be Refraction and Total Internal Reflection (week 3, slide 8).
@@ -204,7 +203,7 @@ bool RayTracer::trace_refracted(const Ray& in, const HitInfo& in_hit, Ray& out, 
 		out_hit.trace_depth = in_hit.trace_depth + 1;
 
 		float const cos_in = dot(-in.direction, in_hit.shading_normal);
-		float const cos_out = dot(in.direction, -in_hit.shading_normal);
+		float const cos_out = dot(out.direction, -in_hit.shading_normal);
 		
 		R = fresnel_R(cos_in, cos_out, in_hit.ray_ior, out_hit.ray_ior);
 		return scene->closest_hit(out, out_hit);
