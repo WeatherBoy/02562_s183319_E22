@@ -75,29 +75,71 @@ bool PointLight::sample(const float3& pos, float3& dir, float3& L) const {
 	return true;
 }
 
-bool PointLight::emit(Ray& r, HitInfo& hit, float3& Phi) const
-{
-  // Emit a photon by creating a ray, tracing it, and computing its flux.
-  //
-  // Output: r    (the photon ray)
-  //         hit  (the photon ray hit info)
-  //         Phi  (the photon flux)
-  //
-  // Return: true if the photon hits a surface
-  //
-  // Relevant data fields that are available (see PointLight.h and Light.h):
-  // tracer     (pointer to ray tracer)
-  // light_pos  (position of the point light)
-  // intensity  (intensity of the emitted light)
-  //
-  // Hint: When sampling the ray direction, use the function
-  //       mt_random() to get a random number in [0,1].
+bool PointLight::emit(Ray& r, HitInfo& hit, float3& Phi) const {
+	// Emit a photon by creating a ray, tracing it, and computing its flux.
+	//
+	// Output: r    (the photon ray)
+	//         hit  (the photon ray hit info)
+	//         Phi  (the photon flux)
+	//
+	// Return: true if the photon hits a surface
+	//
+	// Relevant data fields that are available (see PointLight.h and Light.h):
+	// tracer     (pointer to ray tracer)
+	// light_pos  (position of the point light)
+	// intensity  (intensity of the emitted light)
+	//
+	// Hint: When sampling the ray direction, use the function
+	//       mt_random() to get a random number in [0,1].
 
-  // Sample ray direction and create ray
+	// Sample ray direction and create ray
 
-  // Trace ray
+	// Trace ray
   
-  // If a surface was hit, compute Phi and return true
+	// If a surface was hit, compute Phi and return true
 
-  return false;
+	/*
+	* Defining epsilon. It needs be a new value everytime:
+	*/
+	float constexpr epsilon = 0.0000001;
+
+	/*
+	* As Jakob described, we sample a random vector within a cube,
+	* but what we want to do is sampling a random vector within a sphere
+	* since a sphere makes up quite a significant part of a cube,
+	* we can just sample from the cube untill we are within the sphere.
+	* 
+	* See week 8, slide 12.
+	*/
+	do {
+		r.direction.x = 2.0f * mt_random() - 1.0f;
+		r.direction.y = 2.0f * mt_random() - 1.0f;
+		r.direction.z = 2.0f * mt_random() - 1.0f;
+
+	} while (dot(r.direction, r.direction) > 1.0f);
+
+	/*
+	* Fills in the ray with information.
+	*/
+	r.direction = normalize(r.direction);
+	r.tmin = epsilon;
+	r.tmax = RT_DEFAULT_MAX;
+	r.ray_type = 0;
+	r.origin = light_pos;
+	
+
+	if (tracer->trace_to_closest(r, hit)) {
+		/*
+		* Finally we find phi as described on:
+		* Photon emission from an isotropic point light
+		* (Week 8, slide 11).
+		*/
+		Phi = 4 * M_PIf * intensity;
+
+		return true;
+
+	}
+
+	return false;
 }
+

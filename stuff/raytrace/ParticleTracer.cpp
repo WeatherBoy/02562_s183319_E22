@@ -82,46 +82,124 @@ void ParticleTracer::draw_caustics_map()
   caustics.draw();
 }
 
-void ParticleTracer::trace_particle(const Light* light, const unsigned int caustics_done)
-{
-  if(caustics_done)
-    return;
-
-  // Shoot a particle from the sampled source
-  Ray r;
-  HitInfo hit;
-
-  // Forward from all specular surfaces
-  while(scene->is_specular(hit.material) && hit.trace_depth < 500)
-  {
-    switch(hit.material->illum)
-    {
-    case 3:  // mirror materials
-      {
-        // Forward from mirror surfaces here
+void ParticleTracer::trace_particle(const Light* light, const unsigned int caustics_done) {
+    if (caustics_done) {
         return;
-      }
-      break;
-    case 11: // absorbing volume
-    case 12: // absorbing glossy volume
-      {
-        // Handle absorption here (Worksheet 8)
-      }
-    case 2:  // glossy materials
-    case 4:  // transparent materials
-      {
-        // Forward from transparent surfaces here
-        return;
-      }
-      break;
-    default: 
-      return;
+
     }
-  }
+    
 
-  // Store in caustics map at first diffuse surface
-  // Hint: When storing, the convention is that the photon direction
-  //       should point back toward where the photon came from.
+    float3 Phi;
+
+    // Shoot a particle from the sampled source
+    Ray r;
+    HitInfo hit;
+
+    if (!light->emit(r, hit, Phi)) {
+        /*
+        * If we don't hit we return (we don't need to process any further).
+        */
+        return;
+
+    }
+    if (!scene->is_specular(hit.material)) {
+        return;
+
+    }
+
+    // Forward from all specular surfaces
+    while(scene->is_specular(hit.material) && hit.trace_depth < 500) {
+        switch(hit.material->illum) {
+            /*
+            * 'switch' is more like jump statement. It states from which case we enter.
+            * This means that if we enter from 'case 11', then we will continue on
+            * to 'case 12' and so forth.
+            * It is only when there are breaks in between cases, that we move to
+            * the end of the switch statement.
+            */
+            case 3: { // mirror materials
+                // Forward from mirror surfaces here
+                Ray reflected_r;
+                HitInfo reflected_hit;
+
+                if (trace_reflected(r, hit, reflected_r, reflected_hit)) {
+                    /*
+                    * If we hit by trace_reflected then we update 'ray' and
+                    * 'hit' accordingly.
+                    */
+                    r = reflected_r;
+                    hit = reflected_hit;
+                }
+                else {
+                    /*
+                    * If we don't hit anything, then we return from the function
+                    */
+                    return;
+
+                }
+
+            }
+            /*
+            * This break means that no matter what, after we have completed 'case 3' we will
+            * move further on in the while-loop.
+            * If we didn't do this break, we might go to a new case, since we update 'hit'.
+            */
+            break;
+
+            case 11: // absorbing volume
+            case 12: { // absorbing glossy volume
+                // Handle absorption here (Worksheet 8)
+
+                /*
+                * For reference see the shade in GlossyVolume.cpp
+                */
+                if (dot(r.direction, hit.shading_normal) > 0.0f) {
+                    Phi *= get_transmittance(hit);
+
+                }
+                
+
+            }
+            case 2:  // glossy materials
+            case 4: {  // transparent materials
+                // Forward from transparent surfaces here
+
+                Ray out;
+                HitInfo out_hit;
+                float R;
+                trace_refracted(r, hit, out, out_hit, R);
+                if (mt_random() <= R) {
+                    out_hit.has_hit = false;
+                    trace_reflected(r, hit, out, out_hit);
+
+                }
+                if (out_hit.has_hit) {
+                    r = out;
+                    hit = out_hit;
+
+                } else {
+                    return;
+
+                }
+
+            }
+            break;
+
+            default: 
+                return;
+        }
+
+    }
+
+    /*
+    * It is the negative direction because of this line in the worksheet09:
+    *  "Follow the convention of storing the direction
+    *    to the photon source with the photon."
+    */
+    caustics.store(Phi, hit.position, -r.direction);
+    // Store in caustics map at first diffuse surface
+    // Hint: When storing, the convention is that the photon direction
+    //       should point back toward where the photon came from.
 }
 
 float3 ParticleTracer::get_diffuse(const HitInfo& hit) const
@@ -130,15 +208,36 @@ float3 ParticleTracer::get_diffuse(const HitInfo& hit) const
   return m ? make_float3(m->diffuse[0], m->diffuse[1], m->diffuse[2]) : make_float3(0.8f);
 }
 
-float3 ParticleTracer::get_transmittance(const HitInfo& hit) const
-{
-  if(hit.material)
-  {
-    // Compute and return the transmittance using the diffuse reflectance of the material.
-    // Diffuse reflectance rho_d does not make sense for a specular material, so we can use 
-    // this material property as an absorption coefficient. Since absorption has an effect
-    // opposite that of reflection, using 1/rho_d-1 makes it more intuitive for the user.
-    float3 rho_d = make_float3(hit.material->diffuse[0], hit.material->diffuse[1], hit.material->diffuse[2]);
-  }
-  return make_float3(1.0f);
+float3 ParticleTracer::get_transmittance(const HitInfo& hit) const {
+
+    if (hit.material) {
+        // Compute and return the transmittance using the diffuse reflectance of the material.
+        // Diffuse reflectance rho_d does not make sense for a specular material, so we can use 
+        // this material property as an absorption coefficient. Since absorption has an effect
+        // opposite that of reflection, using 1/rho_d-1 makes it more intuitive for the user.
+        float3 rho_d = make_float3(hit.material->diffuse[0], hit.material->diffuse[1], hit.material->diffuse[2]);
+
+        /*
+        * New epsilon every single time!
+        *
+        * Finding the max of between rho_d and my value of epsilon, this is possible using the fmaxf()
+        * function.
+        */
+        float3 const epsilon3 = make_float3(0.000001f);
+
+        rho_d = fmaxf(rho_d, epsilon3);
+
+        /*
+        * Finding the exponential function of the negative absorption coefficient
+        * times the distance as shown on page one of worksheet 08.
+        * (This is the transmittance).
+        *
+        * We can use expf() to take the exponential of vectors.
+        */
+        float3 const absorp_coeff = 1 / rho_d - make_float3(1.0f);
+
+        return expf(-absorp_coeff * hit.dist);
+    }
+
+    return make_float3(1.0f);
 }
