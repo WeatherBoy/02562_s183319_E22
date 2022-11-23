@@ -36,7 +36,7 @@ float3 Holdout::shade(const Ray& r, HitInfo& hit, bool emit) const {
 	*/
 	float constexpr epsilon = 0.001;
 
-	for (int i = 0; i < 1; i++) {
+	for (int i = 0; i < samples; i++) {
 		/*
 		* We find something that is supposed to resemble an average
 		*/
@@ -50,7 +50,7 @@ float3 Holdout::shade(const Ray& r, HitInfo& hit, bool emit) const {
 
 	}
 
-	ambient /= 1;
+	ambient /= samples;
 	
 
 	/*
