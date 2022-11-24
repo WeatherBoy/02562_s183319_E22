@@ -28,6 +28,7 @@
   #include <omp.h>
 #endif
 
+
 using namespace std;
 using namespace optix;
 
@@ -118,6 +119,25 @@ void Scene::add_plane(const float3& position, const float3& normal, const string
 	  m.push_back(ObjMaterial());
   Plane* plane = new Plane(position, normal, idx < m.size() ? m[idx] : m.back(), tex_scale);
   planes.push_back(plane);
+}
+
+void Scene::add_mirage_plane(const float3& position, const float3& normal, float const ior_inside, float const ior_outside, unsigned int idx, float tex_scale) {
+
+    vector<ObjMaterial> m;
+    ObjMaterial temp{};
+
+    /*
+    * We calculate index of refraction based on equation (1) of RayTracingMirages.pdf.
+    * And then we give the ObjMaterial a name based on its y-position
+    */
+    temp.ior = ior_inside/ ior_outside;
+    temp.name = "plane_" + std::to_string(position.y);
+    temp.illum = 4; // maybe change to own shader
+
+    if (m.size() == 0)
+        m.push_back(temp);
+    Plane* plane = new Plane(position, normal, idx < m.size() ? m[idx] : m.back(), tex_scale);
+    planes.push_back(plane);
 }
 
 void Scene::add_sphere(const float3& center, float radius, const string& mtl_file, unsigned int idx)
