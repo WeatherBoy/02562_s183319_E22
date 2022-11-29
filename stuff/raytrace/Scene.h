@@ -46,7 +46,7 @@ public:
   void load_texture(const ObjMaterial& mat, bool is_sphere = false);
   void load_textures();
   void add_plane(const optix::float3& position, const optix::float3& normal, const std::string& mtl_file, unsigned int idx = 0, float tex_scale = 1.0f);
-  void add_mirage_plane(const optix::float3& position, const optix::float3& normal, float const ior_inside, float const ior_outside, unsigned int idx = 0, float tex_scale = 1.0f);	// I added this myself
+  void add_mirage_plane(const optix::float3& position, const optix::float3& normal, float const ior_inside, float const ior_outside);	// I added this myself
   void add_sphere(const optix::float3& center, float radius, const std::string& mtl_file, unsigned int idx = 0);
   void add_triangle(const optix::float3& v0, const optix::float3& v1, const optix::float3& v2, const std::string& mtl_file, unsigned int idx = 0);
 

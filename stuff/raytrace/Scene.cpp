@@ -121,22 +121,21 @@ void Scene::add_plane(const float3& position, const float3& normal, const string
   planes.push_back(plane);
 }
 
-void Scene::add_mirage_plane(const float3& position, const float3& normal, float const ior_inside, float const ior_outside, unsigned int idx, float tex_scale) {
-
-    vector<ObjMaterial> m;
-    ObjMaterial temp{};
+void Scene::add_mirage_plane(const float3& position, const float3& normal, float const ior_inside, float const ior_outside) {
+    /*
+    * Anne noted that it was weird how we used a vector of materials that consisted of only
+    * one index. Additionally we probably don't need a texture scale for our "transparent" plane.
+    */
+    ObjMaterial m{};
 
     /*
     * We calculate index of refraction based on equation (1) of RayTracingMirages.pdf.
     * And then we give the ObjMaterial a name based on its y-position
     */
-    temp.ior = ior_inside/ ior_outside;
-    temp.name = "plane_" + std::to_string(position.y);
-    temp.illum = 4; // maybe change to own shader
-
-    if (m.size() == 0)
-        m.push_back(temp);
-    Plane* plane = new Plane(position, normal, idx < m.size() ? m[idx] : m.back(), tex_scale);
+    m.ior = ior_inside/ ior_outside;
+    m.name = "plane_" + std::to_string(position.y);
+    m.illum = 4; // maybe change to own shader
+    Plane* plane = new Plane(position, normal, m);
     planes.push_back(plane);
 }
 

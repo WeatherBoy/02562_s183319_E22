@@ -149,15 +149,15 @@ void RenderEngine::load_files(int argc, char** argv)
           * We calculate the ior of each plane as per "the drawing"
           */ 
           float constexpr step_size = 1.0 / SCENE_HEIGHT;
-          float const xyz = j * step_size;
-          float const ior_below = ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (xyz - step_size)));
-          float const ior_above = ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (xyz + step_size)));
+          float const y = j * step_size;
+          float const ior_below = ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (y - step_size/2)));
+          float const ior_above = ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (y + step_size/2)));
           
           /*
           * We have two planes one with its normal pointing up and one with the normal pointing down.
           */
-          scene.add_mirage_plane(make_float3(xyz, xyz, xyz), make_float3(0.0f, 1.0f, 0.0f), ior_below, ior_above, 1, 0.2f);
-          scene.add_mirage_plane(make_float3(xyz, xyz, xyz), make_float3(0.0f, -1.0f, 0.0f), ior_above, ior_below, 1, 0.2f);
+          scene.add_mirage_plane(make_float3(0.0f, y, 0.0f), make_float3(0.0f, 1.0f, 0.0f), ior_below, ior_above, 1, 0.2f);
+          scene.add_mirage_plane(make_float3(0.0f, y, 0.0f), make_float3(0.0f, -1.0f, 0.0f), ior_above, ior_below, 1, 0.2f);
 
       }
       // scene.add_plane(make_float3(1.0f, 1.0f, 1.0f), make_float3(0.0f, 1.0f, 0.0f), "../models/default_scene.mtl", 1, 0.2f); // last argument is texture scale
