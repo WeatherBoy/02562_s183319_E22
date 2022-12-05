@@ -86,7 +86,7 @@ bool TriMesh::intersect(const Ray& r, HitInfo& hit, unsigned int prim_idx) const
             *
             * Declaring makes for more easily read code.
             */
-            if (has_normals()) {
+            if (has_normals() && false) {
                 uint3 const normal_faces = normals.face(prim_idx);
                 float3 const n0 = normals.vertex(normal_faces.x);
                 float3 const n1 = normals.vertex(normal_faces.y);

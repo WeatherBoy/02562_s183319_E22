@@ -192,7 +192,7 @@ bool RayTracer::trace_refracted(const Ray& in, const HitInfo& in_hit, Ray& out, 
 		/*
 		* Start by setting our tmin and tmax.
 		*/
-		float constexpr epsilon = 0.00001;
+		float constexpr epsilon = 0.001;
 		out.origin = in_hit.position;
 		out.tmin = epsilon;
 		out.tmax = RT_DEFAULT_MAX;

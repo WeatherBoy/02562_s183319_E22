@@ -241,6 +241,9 @@
     <ClInclude Include="PanoramicLight.h">
       <Filter>Lights</Filter>
     </ClInclude>
+    <ClInclude Include="Mirage.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -375,6 +378,9 @@
     </ClCompile>
     <ClCompile Include="PanoramicLight.cpp">
       <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Mirage.cpp">
+      <Filter>Shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

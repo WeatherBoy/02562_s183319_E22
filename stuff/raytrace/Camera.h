@@ -40,6 +40,9 @@ public:
 
   float get_fov() const { return fov; }
   float get_cam_const() const { return cam_const; }
+  optix::float3 get_eye() const { return eye;  }
+  optix::float3 get_lookat() const { return lookat; }
+  optix::float3 get_up() const { return up; }
   void set_cam_const(float camera_constant) { set(eye, lookat, up, camera_constant); }
 
   // OpenGL

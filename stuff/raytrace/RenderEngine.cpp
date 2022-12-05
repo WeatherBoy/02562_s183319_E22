@@ -25,7 +25,7 @@
 * Defined these constants myself for the mirage project
 */
 #ifndef STEPS
-#define STEPS 3
+#define STEPS 10
 #endif
 
 #ifndef SCENE_HEIGHT
@@ -44,6 +44,13 @@
 #define ETA1_SQR 0.21013055999999997
 #endif
 
+#ifndef EPSILON
+#define EPSILON 0.0000001
+#endif
+
+#ifndef TEAPOT_HEIGHT
+#define TEAPOT_HEIGHT 0.5
+#endif
 
 
 using namespace std;
@@ -86,7 +93,7 @@ RenderEngine::RenderEngine()
     use_default_light(true),                                 // Choose whether to use the default light or not
     shadows_on(true),
     background(optix::make_float3(0.1f, 0.3f, 0.6f)),        // Background color
-    bgtex_filename("../../../textures/derelict_highway_midday_8k.hdr"),                                      // Background texture file name //../../../textures/belfast_sunset_puresky_4k.hdr
+    bgtex_filename(""),                                      // Background texture file name //../../../textures/belfast_sunset_puresky_4k.hdr, ../../../textures/derelict_highway_midday_8k.hdr
     current_shader(0),
     lambertian(scene.get_lights()),
     photon_caustics(&tracer, scene.get_lights(), 1.0f, 50),  // Max distance and number of photons to search for
@@ -94,6 +101,7 @@ RenderEngine::RenderEngine()
     holdout(&tracer, scene.get_lights(), 1),                 // No. of samples per path in holdout ambient occlusion
     mirror(&tracer),
     transparent(&tracer),
+    mirage(&tracer),                                        // Added for the mirage project
     volume(&tracer),
     glossy_volume(&tracer, scene.get_lights()),
     mc_glossy(&tracer, scene.get_lights()),
@@ -140,29 +148,40 @@ void RenderEngine::load_files(int argc, char** argv)
      
       // Load the file into the scene
       scene.load_mesh(argv[i], transform);
-
+      float constexpr step_size = SCENE_HEIGHT / STEPS;
+      
       /*
       * My own creation!
       */
-      for (unsigned int j = 0; j < STEPS; j++) {
+      for (int j = 0; j <= STEPS; j++) {
           /*
           * We calculate the ior of each plane as per "the drawing"
-          */ 
-          float constexpr step_size = 1.0 / SCENE_HEIGHT;
-          float const y = j * step_size;
-          float const ior_below = ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (y - step_size/2)));
-          float const ior_above = ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (y + step_size/2)));
+          */
+          float const y =  j * step_size;
+          float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (y - step_size/2))));
+          float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (y + step_size/2))));
+
+          //cout << "y-value: " << y << "\nIOR below : " << ior_below << "\nIOR above : " << ior_above << endl;
           
           /*
           * We have two planes one with its normal pointing up and one with the normal pointing down.
           */
-          scene.add_mirage_plane(make_float3(0.0f, y, 0.0f), make_float3(0.0f, 1.0f, 0.0f), ior_below, ior_above, 1, 0.2f);
-          scene.add_mirage_plane(make_float3(0.0f, y, 0.0f), make_float3(0.0f, -1.0f, 0.0f), ior_above, ior_below, 1, 0.2f);
+          scene.add_mirage_plane(make_float3(0.0f, y + EPSILON - TEAPOT_HEIGHT, 0.0f), make_float3(0.0f, 1.0f, 0.0f), ior_above);
+          scene.add_mirage_plane(make_float3(0.0f, y - TEAPOT_HEIGHT, 0.0f), make_float3(0.0f, -1.0f, 0.0f), ior_below);
 
       }
-      // scene.add_plane(make_float3(1.0f, 1.0f, 1.0f), make_float3(0.0f, 1.0f, 0.0f), "../models/default_scene.mtl", 1, 0.2f); // last argument is texture scale
+
+      scene.add_plane(make_float3(1.0f, 1.0f, 1.0f), make_float3(0.0f, 1.0f, 0.0f), "../models/default_scene.mtl", 1, 0.2f); // last argument is texture scale
     }
     init_view();
+    float3 eye = cam.get_eye();
+    eye.y += 4;
+    eye.z += 5;
+
+    float3 lookat = cam.get_lookat();
+    float3 up = cam.get_up();
+    vctrl->set_view_param(eye, lookat, up);
+    cam.set(eye, lookat, up, 1.0f);
   }
   else
   {
@@ -241,7 +260,10 @@ void RenderEngine::init_tracer()
     /*
     * Commented back in for Worksheet07
     */
-    scene.add_plane(make_float3(0.0f), make_float3(0.0f, 1.0f, 0.0f), "../models/plane.mtl", 4); // holdout plane
+    /*
+    * Commented out for mirages
+    */
+    // scene.add_plane(make_float3(0.0f), make_float3(0.0f, 1.0f, 0.0f), "../models/plane.mtl", 4); // holdout plane
     /*
     * Till here...
     */
@@ -253,6 +275,7 @@ void RenderEngine::init_tracer()
   scene.set_shader(2, &glossy);                 // shader for illum 2 (calls lambertian until implemented)
   scene.set_shader(3, &mirror);                 // shader for illum 3
   scene.set_shader(4, &transparent);            // shader for illum 4
+  scene.set_shader(5, &mirage);                 // shader for illum 5
   scene.set_shader(11, &volume);                // shader for illum 11
   scene.set_shader(12, &glossy_volume);         // shader for illum 12
   scene.set_shader(30, &holdout);               // shader for illum 30

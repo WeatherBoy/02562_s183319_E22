@@ -22,6 +22,7 @@
 #include "Holdout.h"
 #include "Mirror.h"
 #include "Transparent.h"
+#include "Mirage.h"
 #include "Volume.h"
 #include "GlossyVolume.h"
 #include "MCGlossy.h"
@@ -150,6 +151,7 @@ private:
   Holdout holdout;
   Mirror mirror;
   Transparent transparent;
+  Mirage mirage;
   Volume volume;
   GlossyVolume glossy_volume;
   MCGlossy mc_glossy;

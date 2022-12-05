@@ -12,6 +12,25 @@
 using namespace std;
 using namespace optix;
 
+/*
+* Defined these constants myself for the mirage project
+*/
+#ifndef ALPHA
+#define ALPHA 0.43421623968736434
+#endif
+
+#ifndef ETA0_SQR
+#define ETA0_SQR 1.0004660542889998
+#endif
+
+#ifndef ETA1_SQR
+#define ETA1_SQR 0.21013055999999997
+#endif
+
+#ifndef EPSILON
+#define EPSILON 0.001
+#endif
+
 float3 RayCaster::compute_pixel(unsigned int x, unsigned int y) const {
 
     /*
@@ -95,6 +114,10 @@ float3 RayCaster::compute_pixel(unsigned int x, unsigned int y) const {
                 * colour our pixel.
                 */
                 result += scene->get_shader(hit)->shade(some_ray, hit);
+
+                float const ior = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * some_ray.origin.y)));
+
+                hit.ray_ior = ior;
 
             }
             else {
