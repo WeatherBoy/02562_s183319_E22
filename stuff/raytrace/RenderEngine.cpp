@@ -25,11 +25,11 @@
 * Defined these constants myself for the mirage project
 */
 #ifndef STEPS
-#define STEPS 10
+#define STEPS 5
 #endif
 
 #ifndef SCENE_HEIGHT
-#define SCENE_HEIGHT 2.0
+#define SCENE_HEIGHT 4.0
 #endif
 
 #ifndef ALPHA
@@ -49,7 +49,7 @@
 #endif
 
 #ifndef TEAPOT_HEIGHT
-#define TEAPOT_HEIGHT 0.5
+#define TEAPOT_HEIGHT 3.0
 #endif
 
 
@@ -73,8 +73,8 @@ namespace
 // Initialization
 //////////////////////////////////////////////////////////////////////
 
-RenderEngine::RenderEngine() 
-  : win(optix::make_uint2(512, 512)),                        // Default window size
+RenderEngine::RenderEngine():
+    win(optix::make_uint2(512, 512)),                        // Default window size
     res(optix::make_uint2(512, 512)),                        // Default render resolution
     image(res.x*res.y),
     image_tex(0),
@@ -93,7 +93,7 @@ RenderEngine::RenderEngine()
     use_default_light(true),                                 // Choose whether to use the default light or not
     shadows_on(true),
     background(optix::make_float3(0.1f, 0.3f, 0.6f)),        // Background color
-    bgtex_filename(""),                                      // Background texture file name //../../../textures/belfast_sunset_puresky_4k.hdr, ../../../textures/derelict_highway_midday_8k.hdr
+    bgtex_filename("../../../textures/derelict_highway_midday_8k.hdr"),                                      // Background texture file name //../../../textures/belfast_sunset_puresky_4k.hdr, ../../../textures/derelict_highway_midday_8k.hdr
     current_shader(0),
     lambertian(scene.get_lights()),
     photon_caustics(&tracer, scene.get_lights(), 1.0f, 50),  // Max distance and number of photons to search for
@@ -148,34 +148,39 @@ void RenderEngine::load_files(int argc, char** argv)
      
       // Load the file into the scene
       scene.load_mesh(argv[i], transform);
+      // float constexpr step_size = 1.0;
       float constexpr step_size = SCENE_HEIGHT / STEPS;
+      
       
       /*
       * My own creation!
       */
-      for (int j = 0; j <= STEPS; j++) {
+      for (int j = 0; j < STEPS; j++) {
           /*
           * We calculate the ior of each plane as per "the drawing"
           */
           float const y =  j * step_size;
-          float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (y - step_size/2))));
-          float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (y + step_size/2))));
+          float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y - step_size/2) ) ) ) );
+          float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y + step_size/2) ) ) ) );
 
-          //cout << "y-value: " << y << "\nIOR below : " << ior_below << "\nIOR above : " << ior_above << endl;
+          cout << "y-value: " << y << "\nIOR below : " << ior_below << "\nIOR above : " << ior_above << endl;
           
           /*
           * We have two planes one with its normal pointing up and one with the normal pointing down.
           */
-          scene.add_mirage_plane(make_float3(0.0f, y + EPSILON - TEAPOT_HEIGHT, 0.0f), make_float3(0.0f, 1.0f, 0.0f), ior_above);
-          scene.add_mirage_plane(make_float3(0.0f, y - TEAPOT_HEIGHT, 0.0f), make_float3(0.0f, -1.0f, 0.0f), ior_below);
+          scene.add_mirage_plane(make_float3(0.0f,  y + EPSILON + TEAPOT_HEIGHT, 0.0f), make_float3(0.005f, 1.0f, 0.0f), ior_above);
+          scene.add_mirage_plane(make_float3(0.0f, y + TEAPOT_HEIGHT, 0.0f), make_float3(-0.005f, -1.0f, 0.0f), ior_below);
 
       }
 
-      scene.add_plane(make_float3(1.0f, 1.0f, 1.0f), make_float3(0.0f, 1.0f, 0.0f), "../models/default_scene.mtl", 1, 0.2f); // last argument is texture scale
+      //scene.add_plane(make_float3(0.0f, 0.0f, -10000.0f), make_float3(0.1f, 0.0f, 1.0f), "../models/default_scene.mtl", 1, 0.2f); // last argument is texture scale
+      // scene.add_plane(make_float3(0.0f, 0.0f, -410.0f), make_float3(0.0f, 0.0f, 1.0f), "../models/default_scene.mtl", 2, 0.2f); // last argument is texture scale
+      // scene.add_plane(make_float3(0.0f, 0.0f, 410.0f), make_float3(0.0f, 0.0f, -1.0f), "../models/default_scene.mtl", 3, 0.2f); // last argument is texture scale
+      //scene.add_plane(make_float3(1.0f, 1.0f, 1.0f), make_float3(0.0f, 1.0f, 0.0f), "../models/default_scene.mtl", 1, 0.2f); // last argument is texture scale
     }
     init_view();
     float3 eye = cam.get_eye();
-    eye.y += 4;
+    eye.y += 0;
     eye.z += 5;
 
     float3 lookat = cam.get_lookat();

@@ -1,6 +1,8 @@
+#include <iostream>
 #include <optix_world.h>
 #include "mt_random.h"
 #include "PathTracer.h"
+using namespace std;
 
 using namespace optix;
 
@@ -28,7 +30,8 @@ void PathTracer::update_pixel(unsigned int x, unsigned int y, float sample_numbe
   float2 ip_coords = make_float2(x + mt_random(), y + mt_random())*win_to_ip + lower_left;
   Ray r = scene->get_camera()->get_ray(ip_coords);
 
-  float const ior = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * r.origin.y)));
+  float const ior = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (4.0 - r.origin.y) ) ) );
+;
 
   HitInfo hit;
   hit.ray_ior = ior;

@@ -24,10 +24,10 @@ float3 Mirage::shade(const Ray& r, HitInfo& hit, bool emit) const {
 	* or refraction.
 	*/
 	if (R == 1.0f) {
-		return shade_new_ray(reflected, hit_refracted);
+		return shade_new_ray(reflected, hit_reflected);
 	}
 	else {
-		return shade_new_ray(refracted, hit_reflected);
+		return shade_new_ray(refracted, hit_refracted);
 	}
 
 }
