@@ -29,7 +29,11 @@
 #endif
 
 #ifndef SCENE_HEIGHT
-#define SCENE_HEIGHT 4.0
+#define SCENE_HEIGHT 1.0
+#endif
+
+#ifndef REAL_HEIGHT
+#define REAL_HEIGHT 1000.0
 #endif
 
 #ifndef ALPHA
@@ -49,7 +53,7 @@
 #endif
 
 #ifndef TEAPOT_HEIGHT
-#define TEAPOT_HEIGHT 3.0
+#define TEAPOT_HEIGHT 0.5
 #endif
 
 
@@ -150,26 +154,32 @@ void RenderEngine::load_files(int argc, char** argv)
       scene.load_mesh(argv[i], transform);
       // float constexpr step_size = 1.0;
       float constexpr step_size = SCENE_HEIGHT / STEPS;
+      float constexpr real_step_size = REAL_HEIGHT / STEPS;
       
       
       /*
       * My own creation!
       */
+      float y = 0;
+      float real_y = 0;
       for (int j = 0; j < STEPS; j++) {
           /*
           * We calculate the ior of each plane as per "the drawing"
           */
-          float const y =  j * step_size;
-          float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y - step_size/2) ) ) ) );
-          float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y + step_size/2) ) ) ) );
+          y =  j * step_size;
+          real_y = j * real_step_size;
+          // float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y - step_size/2) ) ) ) );
+          // float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y + step_size/2) ) ) ) );
+          float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (real_y - step_size/2) ) ) );
+          float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (real_y + step_size/2) ) ) );
 
-          cout << "y-value: " << y << "\nIOR below : " << ior_below << "\nIOR above : " << ior_above << endl;
+          //cout << "y-value: " << y << "\nreal y-value: " << real_y << "\nIOR below : " << ior_below << "\nIOR above : " << ior_above << endl;
           
           /*
           * We have two planes one with its normal pointing up and one with the normal pointing down.
           */
-          scene.add_mirage_plane(make_float3(0.0f,  y + EPSILON + TEAPOT_HEIGHT, 0.0f), make_float3(0.005f, 1.0f, 0.0f), ior_above);
-          scene.add_mirage_plane(make_float3(0.0f, y + TEAPOT_HEIGHT, 0.0f), make_float3(-0.005f, -1.0f, 0.0f), ior_below);
+          scene.add_mirage_plane(make_float3(0.0f,  y + EPSILON - TEAPOT_HEIGHT, 0.0f), make_float3(0.005f, 1.0f, 0.0f), ior_above);
+          scene.add_mirage_plane(make_float3(0.0f, y - TEAPOT_HEIGHT, 0.0f), make_float3(-0.005f, -1.0f, 0.0f), ior_below);
 
       }
 

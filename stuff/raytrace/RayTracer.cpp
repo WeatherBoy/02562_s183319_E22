@@ -210,7 +210,7 @@ bool RayTracer::trace_refracted(const Ray& in, const HitInfo& in_hit, Ray& out, 
 
 	}
 
-	R = 1;
+	R = 1.0f;
 	return out_hit.has_hit;
 
 	// R = 0.1;
