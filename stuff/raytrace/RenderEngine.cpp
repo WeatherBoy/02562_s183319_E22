@@ -29,19 +29,19 @@
 #endif
 
 #ifndef SCENE_HEIGHT
-#define SCENE_HEIGHT 1.0
+#define SCENE_HEIGHT 0.8
 #endif
 
-#ifndef REAL_HEIGHT
-#define REAL_HEIGHT 1000.0
+#ifndef REAL_TEAPOT_HEIGHT
+#define REAL_TEAPOT_HEIGHT 0.2
 #endif
 
 #ifndef ALPHA
-#define ALPHA 0.43421623968736434
+#define ALPHA 2.303
 #endif
 
 #ifndef ETA0_SQR
-#define ETA0_SQR 1.0004660542889998
+#define ETA0_SQR 1.0004660542889998 //0.984064
 #endif
 
 #ifndef ETA1_SQR
@@ -52,8 +52,8 @@
 #define EPSILON 0.0000001
 #endif
 
-#ifndef TEAPOT_HEIGHT
-#define TEAPOT_HEIGHT 0.5
+#ifndef HALF_TEAPOT_HEIGHT
+#define HALF_TEAPOT_HEIGHT 0.5
 #endif
 
 
@@ -97,7 +97,7 @@ RenderEngine::RenderEngine():
     use_default_light(true),                                 // Choose whether to use the default light or not
     shadows_on(true),
     background(optix::make_float3(0.1f, 0.3f, 0.6f)),        // Background color
-    bgtex_filename("../../../textures/derelict_highway_midday_8k.hdr"),                                      // Background texture file name //../../../textures/belfast_sunset_puresky_4k.hdr, ../../../textures/derelict_highway_midday_8k.hdr
+    bgtex_filename("../../../textures/derelict_highway_midday_8k.hdr"), // ../../../textures/rustig_koppie_puresky_1k.hdr, Background texture file name //../../../textures/belfast_sunset_puresky_4k.hdr, ../../../textures/derelict_highway_midday_8k.hdr
     current_shader(0),
     lambertian(scene.get_lights()),
     photon_caustics(&tracer, scene.get_lights(), 1.0f, 50),  // Max distance and number of photons to search for
@@ -148,50 +148,61 @@ void RenderEngine::load_files(int argc, char** argv)
       else if(char_traits<char>::compare(filename.c_str(), "bunny", 5) == 0)
         transform = Matrix4x4::translate(make_float3(-3.0f, -0.85f, -8.0f))*Matrix4x4::scale(make_float3(25.0f));
       else if(char_traits<char>::compare(filename.c_str(), "justelephant", 12) == 0)
-        transform = Matrix4x4::translate(make_float3(-10.0f, 3.0f, -2.0f))*Matrix4x4::rotate(0.5f, make_float3(0.0f, 1.0f, 0.0f));
-     
+        // original elephant
+        // transform = Matrix4x4::translate(make_float3(-10.0f, 3.0f, -2.0f))*Matrix4x4::rotate(0.5f, make_float3(0.0f, 1.0f, 0.0f));
+        // repositionend elephant
+        transform = Matrix4x4::translate(make_float3(15.0f, 2.0f, -16.0f))*Matrix4x4::rotate(0.5f, make_float3(0.0f, 0.25f, 0.0f));
+
       // Load the file into the scene
       scene.load_mesh(argv[i], transform);
-      // float constexpr step_size = 1.0;
-      float constexpr step_size = SCENE_HEIGHT / STEPS;
-      float constexpr real_step_size = REAL_HEIGHT / STEPS;
+     
       
       
-      /*
-      * My own creation!
-      */
-      float y = 0;
-      float real_y = 0;
-      for (int j = 0; j < STEPS; j++) {
-          /*
-          * We calculate the ior of each plane as per "the drawing"
-          */
-          y =  j * step_size;
-          real_y = j * real_step_size;
-          // float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y - step_size/2) ) ) ) );
-          // float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y + step_size/2) ) ) ) );
-          float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (real_y - step_size/2) ) ) );
-          float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (real_y + step_size/2) ) ) );
-
-          //cout << "y-value: " << y << "\nreal y-value: " << real_y << "\nIOR below : " << ior_below << "\nIOR above : " << ior_above << endl;
-          
-          /*
-          * We have two planes one with its normal pointing up and one with the normal pointing down.
-          */
-          scene.add_mirage_plane(make_float3(0.0f,  y + EPSILON - TEAPOT_HEIGHT, 0.0f), make_float3(0.005f, 1.0f, 0.0f), ior_above);
-          scene.add_mirage_plane(make_float3(0.0f, y - TEAPOT_HEIGHT, 0.0f), make_float3(-0.005f, -1.0f, 0.0f), ior_below);
-
-      }
+     
 
       //scene.add_plane(make_float3(0.0f, 0.0f, -10000.0f), make_float3(0.1f, 0.0f, 1.0f), "../models/default_scene.mtl", 1, 0.2f); // last argument is texture scale
       // scene.add_plane(make_float3(0.0f, 0.0f, -410.0f), make_float3(0.0f, 0.0f, 1.0f), "../models/default_scene.mtl", 2, 0.2f); // last argument is texture scale
       // scene.add_plane(make_float3(0.0f, 0.0f, 410.0f), make_float3(0.0f, 0.0f, -1.0f), "../models/default_scene.mtl", 3, 0.2f); // last argument is texture scale
       //scene.add_plane(make_float3(1.0f, 1.0f, 1.0f), make_float3(0.0f, 1.0f, 0.0f), "../models/default_scene.mtl", 1, 0.2f); // last argument is texture scale
     }
+
+    // float constexpr step_size = 1.0;
+    float constexpr step_size = SCENE_HEIGHT / STEPS;
+    // float constexpr real_step_size = REAL_HEIGHT / STEPS;
+
+    float constexpr real_to_engine_scale = REAL_TEAPOT_HEIGHT / (2.0 * HALF_TEAPOT_HEIGHT);
+
+    /*
+    * My own creation!
+    */
+    float y = 0;
+    float real_y = 0;
+    for (int j = 0; j < STEPS; j++) {
+        /*
+        * We calculate the ior of each plane as per "the drawing"
+        */
+        y = j * step_size;
+        real_y = y * real_to_engine_scale;
+        // float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y - step_size/2) ) ) ) );
+        // float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y + step_size/2) ) ) ) );
+        float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (real_y - step_size / 2))));
+        float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (real_y + step_size / 2))));
+
+        //cout << "y-value: " << y << "\nreal y-value: " << real_y << "\nIOR below : " << ior_below << "\nIOR above : " << ior_above << endl;
+
+        /*
+        * We have two planes one with its normal pointing up and one with the normal pointing down.
+        */
+        scene.add_mirage_plane(make_float3(0.0f, y + EPSILON - HALF_TEAPOT_HEIGHT, 0.0f), make_float3(0.005f, 1.0f, 0.0f), ior_above);
+        scene.add_mirage_plane(make_float3(0.0f, y - HALF_TEAPOT_HEIGHT, 0.0f), make_float3(-0.005f, -1.0f, 0.0f), ior_below);
+
+    }
+
     init_view();
     float3 eye = cam.get_eye();
-    eye.y += 0;
+    eye.y -= 3;
     eye.z += 5;
+    eye.x += 0;
 
     float3 lookat = cam.get_lookat();
     float3 up = cam.get_up();

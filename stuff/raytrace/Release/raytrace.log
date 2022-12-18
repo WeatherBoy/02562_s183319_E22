@@ -1,6 +1,7 @@
-﻿  Generating code
-  1 of 2082 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+﻿  RenderEngine.cpp
+  Generating code
+  1 of 2083 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    15 functions had inline decision re-evaluated but remain unchanged
+    13 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   raytrace.vcxproj -> C:\Users\daflo\Documents\DTU\Semester_7\02562_Rendering\02562_s183319_E22\stuff\Release\raytrace.exe
