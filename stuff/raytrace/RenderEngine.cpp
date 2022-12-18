@@ -155,21 +155,9 @@ void RenderEngine::load_files(int argc, char** argv)
 
       // Load the file into the scene
       scene.load_mesh(argv[i], transform);
-     
-      
-      
-     
-
-      //scene.add_plane(make_float3(0.0f, 0.0f, -10000.0f), make_float3(0.1f, 0.0f, 1.0f), "../models/default_scene.mtl", 1, 0.2f); // last argument is texture scale
-      // scene.add_plane(make_float3(0.0f, 0.0f, -410.0f), make_float3(0.0f, 0.0f, 1.0f), "../models/default_scene.mtl", 2, 0.2f); // last argument is texture scale
-      // scene.add_plane(make_float3(0.0f, 0.0f, 410.0f), make_float3(0.0f, 0.0f, -1.0f), "../models/default_scene.mtl", 3, 0.2f); // last argument is texture scale
-      //scene.add_plane(make_float3(1.0f, 1.0f, 1.0f), make_float3(0.0f, 1.0f, 0.0f), "../models/default_scene.mtl", 1, 0.2f); // last argument is texture scale
     }
 
-    // float constexpr step_size = 1.0;
     float constexpr step_size = SCENE_HEIGHT / STEPS;
-    // float constexpr real_step_size = REAL_HEIGHT / STEPS;
-
     float constexpr real_to_engine_scale = REAL_TEAPOT_HEIGHT / (2.0 * HALF_TEAPOT_HEIGHT);
 
     /*
@@ -183,19 +171,14 @@ void RenderEngine::load_files(int argc, char** argv)
         */
         y = j * step_size;
         real_y = y * real_to_engine_scale;
-        // float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y - step_size/2) ) ) ) );
-        // float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - (y + step_size/2) ) ) ) );
         float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (real_y - step_size / 2))));
         float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (real_y + step_size / 2))));
-
-        //cout << "y-value: " << y << "\nreal y-value: " << real_y << "\nIOR below : " << ior_below << "\nIOR above : " << ior_above << endl;
 
         /*
         * We have two planes one with its normal pointing up and one with the normal pointing down.
         */
         scene.add_mirage_plane(make_float3(0.0f, y + EPSILON - HALF_TEAPOT_HEIGHT, 0.0f), make_float3(0.005f, 1.0f, 0.0f), ior_above);
         scene.add_mirage_plane(make_float3(0.0f, y - HALF_TEAPOT_HEIGHT, 0.0f), make_float3(-0.005f, -1.0f, 0.0f), ior_below);
-
     }
 
     init_view();

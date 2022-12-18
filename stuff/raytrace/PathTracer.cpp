@@ -35,7 +35,6 @@ void PathTracer::update_pixel(unsigned int x, unsigned int y, float sample_numbe
   Ray r = scene->get_camera()->get_ray(ip_coords);
 
   float const ior = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA *  r.origin.y ) ) );
-  // float const ior = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (SCENE_HEIGHT - r.origin.y))));
 
   HitInfo hit;
   hit.ray_ior = ior;
