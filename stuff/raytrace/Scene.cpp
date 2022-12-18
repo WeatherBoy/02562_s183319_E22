@@ -134,7 +134,7 @@ void Scene::add_mirage_plane(const float3& position, const float3& normal, float
     */
     m.ior = ior;
     m.name = "plane_" + std::to_string(position.y);
-    m.illum = 5; // maybe change to own shader
+    m.illum = 5;
     Plane* plane = new Plane(position, normal, m);
     planes.push_back(plane);
 }
