@@ -151,7 +151,7 @@ void RenderEngine::load_files(int argc, char** argv)
         // original elephant
         // transform = Matrix4x4::translate(make_float3(-10.0f, 3.0f, -2.0f))*Matrix4x4::rotate(0.5f, make_float3(0.0f, 1.0f, 0.0f));
         // repositionend elephant
-        transform = Matrix4x4::translate(make_float3(15.0f, 2.0f, -16.0f))*Matrix4x4::rotate(0.5f, make_float3(0.0f, 0.25f, 0.0f));
+        transform = Matrix4x4::translate(make_float3(10.0f, 2.0f, -12.0f))*Matrix4x4::rotate(0.5f, make_float3(0.0f, 0.25f, 0.0f));
 
       // Load the file into the scene
       scene.load_mesh(argv[i], transform);

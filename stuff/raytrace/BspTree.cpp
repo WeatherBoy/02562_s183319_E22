@@ -75,7 +75,7 @@ bool BspTree::any_hit(Ray& r, HitInfo& hit) const {
     */
     if (!Accelerator::any_plane(r, hit)) {
         /*
-        * A little uintuitive syntax, but this is definitely the logical relation
+        * A little unintuitive syntax, but this is definitely the logical relation
         * that makes the most sense.
         * 
         * If we don't hit any plane then we check the intersect node,
