@@ -136,9 +136,8 @@ float4 Texture::sample_linear(const float3& texcoord) const {
     float4 const x11 = fdata[U1 + V1 * width];
 
 
-
-    return bilerp(x00, x10, x01, x11, c_1, c_2);
     //return sample_nearest(texcoord);
+    return bilerp(x00, x10, x01, x11, c_1, c_2);
 }
 
 float4 Texture::look_up(unsigned int idx) const

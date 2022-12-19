@@ -3,7 +3,7 @@ Ka 0.01 0.07 0.00
 Kd 0.09 0.63 0.00
 Ks 0.00 0.00 0.00	
 illum 1
-map_Kd painted_concrete_diff_4k.jpg
+map_Kd grass.jpg
 
 newmtl glass
 Ka 0.0 0.0 0.0
