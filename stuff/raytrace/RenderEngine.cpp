@@ -36,8 +36,8 @@
 #define DELTA 0.3
 #endif
 
-#ifndef REAL_TEAPOT_HEIGHT
-#define REAL_TEAPOT_HEIGHT 0.2
+#ifndef TEAPOT_HEIGHT
+#define TEAPOT_HEIGHT 3.2
 #endif
 
 #ifndef ALPHA
@@ -56,8 +56,8 @@
 #define EPSILON 0.0000001
 #endif
 
-#ifndef TEAPOT_HEIGHT
-#define TEAPOT_HEIGHT 1.0
+#ifndef REAL_TO_ENGINE_SCALE
+#define REAL_TO_ENGINE_SCALE 0.0625
 #endif
 
 
@@ -162,7 +162,6 @@ void RenderEngine::load_files(int argc, char** argv)
     }
 
     float constexpr step_size = MIRAGE_BOX_HEIGHT / STEPS;
-    float constexpr real_to_engine_scale = REAL_TEAPOT_HEIGHT / TEAPOT_HEIGHT;
 
     /*
     * My own creation!
@@ -174,15 +173,15 @@ void RenderEngine::load_files(int argc, char** argv)
         * We calculate the ior of each plane as per "the drawing"
         */
         y = j * step_size;
-        real_y = y * real_to_engine_scale;
+        real_y = y * REAL_TO_ENGINE_SCALE;
         float const ior_below = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (real_y - step_size / 2))));
         float const ior_above = sqrt(ETA0_SQR + ETA1_SQR * (1 - exp(-ALPHA * (real_y + step_size / 2))));
 
         /*
         * We have two planes one with its normal pointing up and one with the normal pointing down.
         */
-        scene.add_mirage_plane(make_float3(0.0f, y + EPSILON - (MIRAGE_BOX_HEIGHT - DELTA), 0.0f), make_float3(0.005f, 1.0f, 0.0f), ior_above);
-        scene.add_mirage_plane(make_float3(0.0f, y - (MIRAGE_BOX_HEIGHT - DELTA), 0.0f), make_float3(-0.005f, -1.0f, 0.0f), ior_below);
+        scene.add_mirage_plane(make_float3(0.0f, y + EPSILON - (MIRAGE_BOX_HEIGHT - DELTA), 0.0f), make_float3(0.0f, 1.0f, 0.0f), ior_above);
+        scene.add_mirage_plane(make_float3(0.0f, y - (MIRAGE_BOX_HEIGHT - DELTA), 0.0f), make_float3(0.0f, -1.0f, 0.0f), ior_below);
     }
 
     init_view();
